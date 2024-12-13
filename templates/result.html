@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>识别结果</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1>猫叫情绪识别结果</h1>
+  
+  <div id="loading">
+    <img src="/static/loading.gif" alt="加载中..." width="50">
+    <p>加载中，请稍候...</p>
+  </div>
+  
+  <div id="result" style="display:none;">
+    <h2>识别结果:</h2>
+    <p id="emotion"></p>
+    <img id="emotionGif" src="" alt="情绪GIF" width="300">
+  </div>
+
+  <script>
+    const emotion = '{{ emotion }}';  // Flask 中传递的情绪结果
+    const emotionText = {
+      "我要梳毛": "/static/grooming.gif",
+      "我要吃饭": "/static/eating.gif",
+      "我要抱抱": "/static/embracing.gif"
+    };
+
+    if (emotion) {
+      document.getElementById('emotion').innerText = emotion;
+      document.getElementById('emotionGif').src = emotionText[emotion] || '/static/loading.gif'; // 默认加载加载动画
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+    } else {
+      document.getElementById('emotion').innerText = '无法识别情绪';
+      document.getElementById('emotionGif').src = '/static/loading.gif'; // 如果没有识别结果，显示默认动画
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

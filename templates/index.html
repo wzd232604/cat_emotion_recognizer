@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>猫叫情绪识别器</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1>猫叫情绪识别器</h1>
+  <div id="cat-animation">
+    <img src="/static/welcome.gif" alt="猫咪动画" width="200">
+  </div>
+  <form id="uploadForm" action="/predict" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+    <label for="audioFile">上传语音文件:</label>
+    <input type="file" id="audioFile" name="audioFile" accept="audio/*" required>
+    <button type="submit">识别情绪</button>
+  </form>
+
+  <div id="loading" style="display:none;">
+    <img src="/static/loading.gif" alt="加载中..." width="50">
+    <p>加载中，请稍候...</p>
+  </div>
+
+  <script>
+    function showLoading() {
+      // 显示加载动画，隐藏其他内容
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('uploadForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
