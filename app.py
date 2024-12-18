@@ -3,6 +3,7 @@ import os
 import torchaudio
 import torch
 from torch.nn.functional import softmax
+from flask import send_from_directory
 
 # Flask app
 app = Flask(__name__)
@@ -83,9 +84,14 @@ def predict():
 
         # Map prediction to emotion
         emotions = ["我要梳毛", "我要吃饭", "我要抱抱"]
-        return render_template('result.html', emotion=emotions[emotion])
+        return render_template('result.html', emotion=emotions[emotion], audio_filename=file.filename)
 
     return redirect(url_for('index'))  # Redirect to homepage if no file is uploaded
+
+# Serve files from the 'uploads' folder
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 if __name__ == '__main__':
     app.run(debug=True)
