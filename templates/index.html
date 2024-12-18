@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>猫叫情绪识别器</title>
   <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    /* 添加自定义样式 */
+    #uploadForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    #audioFile {
+      margin-bottom: 20px;
+    }
+
+    button {
+      position: relative;
+      background-color: pink;
+      color: white;
+      font-size: 20px;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    button:hover {
+      background-color: #ff88cc; /* 鼠标悬浮变深的粉色 */
+    }
+
+    button img {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      bottom: -10px;
+      right: -10px;
+    }
+  </style>
 </head>
 <body>
   <h1>猫叫情绪识别器</h1>
@@ -14,7 +56,12 @@
   <form id="uploadForm" action="/predict" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
     <label for="audioFile">上传语音文件:</label>
     <input type="file" id="audioFile" name="audioFile" accept="audio/*" required>
-    <button type="submit">识别情绪</button>
+    
+    <!-- 修改后的识别情绪按钮 -->
+    <button type="submit">
+      识别情绪
+      <img src="/static/claws.png" alt="猫爪">
+    </button>
   </form>
 
   <div id="loading" style="display:none;">
