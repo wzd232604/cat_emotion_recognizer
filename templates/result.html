@@ -6,12 +6,11 @@
   <title>识别结果</title>
   <link rel="stylesheet" href="/static/styles.css">
   <style>
-    /* 返回按钮样式，与 index.html 的识别按钮一致 */
     .return-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background-color: #ff99cc; /* 粉红色背景 */
+      background-color: #ff99cc;
       color: white;
       border: none;
       border-radius: 10px;
@@ -21,20 +20,17 @@
       text-decoration: none;
       margin-top: 20px;
     }
-
     .return-button img {
       margin-left: 10px;
       width: 30px;
       height: 30px;
     }
-
     .return-button:hover {
-      background-color: #ff66b2; /* 鼠标悬停更深的粉色 */
+      background-color: #ff66b2;
     }
-
     .button-container {
       display: flex;
-      justify-content: center; /* 居中对齐 */
+      justify-content: center;
       margin-top: 20px;
     }
   </style>
@@ -52,16 +48,14 @@
     <p id="emotion"></p>
     <img id="emotionGif" src="" alt="情绪GIF" width="300">
 
-    <!-- 播放按钮 -->
     <div id="audioPlayer" style="margin-top: 20px;">
       <h3>播放上传的音频文件:</h3>
       <audio id="audio" controls>
-        <source id="audioSource" src="" type="audio/mpeg">
+        <source id="audioSource" src="{{ audio_url }}" type="audio/mpeg">
         您的浏览器不支持音频播放。
       </audio>
     </div>
 
-    <!-- 返回按钮 -->
     <div class="button-container">
       <button class="return-button" onclick="goBack()">
         返回
@@ -73,20 +67,20 @@
   <script>
     // 从 Flask 传递的情绪结果
     const emotion = '{{ emotion }}';  
-    const audioUrl = '{{ audio_url }}';  // 上传的音频文件路径
+    const audioUrl = '/uploads/{{ audio_filename }}';  // 上传的音频文件路径
     const emotionText = {
       "我要梳毛": "/static/grooming.gif",
       "我要吃饭": "/static/eating.gif",
       "我要抱抱": "/static/embracing.gif"
     };
-
+  
     // 显示识别结果
     if (emotion) {
       document.getElementById('emotion').innerText = emotion;
       document.getElementById('emotionGif').src = emotionText[emotion] || '/static/loading.gif'; 
       document.getElementById('loading').style.display = 'none';
       document.getElementById('result').style.display = 'block';
-
+  
       // 设置音频源
       if (audioUrl) {
         document.getElementById('audioSource').src = audioUrl;
@@ -98,7 +92,7 @@
       document.getElementById('loading').style.display = 'none';
       document.getElementById('result').style.display = 'block';
     }
-
+  
     // 返回到 index.html
     function goBack() {
       window.location.href = '/';
