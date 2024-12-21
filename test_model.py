@@ -64,7 +64,7 @@ def test_model(filepath):
 
 # 固定测试文件路径
 if __name__ == "__main__":
-    test_audio_path = '../cat-voice/dataset/B_ANI01_MC_FN_SIM01_101.wav'  # 替换为实际的音频文件路径
+    test_audio_path = 'B_ANI01_MC_FN_SIM01_101.wav'  # 替换为实际的音频文件路径
     if not torch.jit.is_scripting() and not torch.jit.is_tracing():
         print(f"正在测试音频文件: {test_audio_path}")
         test_model(test_audio_path)

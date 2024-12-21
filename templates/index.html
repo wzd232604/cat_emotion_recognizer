@@ -4,39 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>猫叫情绪识别器</title>
-  <link rel="stylesheet" href="/static/styles.css">
   <style>
-    /* 添加自定义样式 */
-    #uploadForm {
+    /* 确保html和body元素的宽度和高度为100% */
+    html, body {
+      height: 100%;
+      width: 100%;  /* 确保body宽度为100% */
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-image: linear-gradient(to right, #ff9a9e, #fad0c4, #fad0c4);
+      font-family: 'Arial', sans-serif;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      margin-top: 20px;
+      flex-direction: column;
+      width: 100%;  /* 保证body宽度自动适应 */
     }
 
-    label {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    #audioFile {
+    /* 优化标题样式 */
+    h1 {
+      font-size: 48px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       margin-bottom: 20px;
     }
 
+    /* 表单容器 */
+    #uploadForm {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;  /* 设置最大宽度 */
+    }
+
+    label {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"] {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 25px;
+      width: 100%;
+    }
+
     button {
-      position: relative;
-      background-color: pink;
+      background-color: #ff68b6;
       color: white;
       font-size: 20px;
-      padding: 10px 30px;
+      padding: 15px 30px;
       border: none;
-      border-radius: 10px;
+      border-radius: 30px;
       cursor: pointer;
-      text-align: center;
+      position: relative;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     button:hover {
-      background-color: #ff88cc; /* 鼠标悬浮变深的粉色 */
+      background-color: #ff4d8b;
+      transform: scale(1.05);
     }
 
     button img {
@@ -45,6 +85,36 @@
       height: 30px;
       bottom: -10px;
       right: -10px;
+    }
+
+    /* 加载动画 */
+    #loading {
+      display: none;
+      text-align: center;
+      color: #333;
+      font-size: 18px;
+      padding-top: 20px;
+    }
+
+    #loading img {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+
+    /* 优化响应式布局 */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      #uploadForm {
+        padding: 30px;
+        width: 100%;  /* 表单宽度100%，适应屏幕 */
+      }
+
+      h1 {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
@@ -64,7 +134,7 @@
     </button>
   </form>
 
-  <div id="loading" style="display:none;">
+  <div id="loading">
     <img src="/static/loading.gif" alt="加载中..." width="50">
     <p>加载中，请稍候...</p>
   </div>
